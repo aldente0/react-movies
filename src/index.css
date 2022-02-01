@@ -1,13 +1,72 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+nav {
+    padding: 0 1rem;
+}
+
+.content {
+    min-height: calc(100vh - 64px - 70px);
+    padding: 1.5rem 0;
+    background-image: url('https://olsspvb.org/wp-content/uploads/2018/05/simulated-twinkling-stars-on-blue-background_bhvfvzthe_thumbnail-full01.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.preloader-wrapper {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.input-field input[type='search']:focus:not(.browser-default) {
+    background-color: transparent;
+    color: #9e9e9e;
+}
+
+.search-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.radio-btns {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+}
+
+.not-found {
+    color: #9e9e9e;
+}
+
+@media (max-width: 601px) {
+    .content {
+        min-height: calc(100vh - 56px - 70px);
+    }
+}
+
+@media (max-width: 576px) {
+    .radio-btns {
+        display: flex;
+        width: 200px;
+        flex-wrap: wrap;
+    }
+
+    nav .brand-logo {
+        font-size: 20px;
+    }
 }
