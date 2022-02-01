@@ -15,22 +15,34 @@ export class Main extends React.Component {
     getSearchValue = (searchValue, type) => {
         this.setState({loading: true});
         if (type === 'all') {
-            fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}`)
+            fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}`)
             .then(response => response.json())
             .then(data => this.setState({movies: data.Search, loading: false}))
+            .catch((err) => {
+                console.error(err);
+                this.setState({loading: false});
+            })
         } else {
-            fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}&type=${type}`)
+            fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}&type=${type}`)
             .then(response => response.json())
             .then(data => this.setState({movies: data.Search, loading: false}))
+            .catch((err) => {
+                console.error(err);
+                this.setState({loading: false});
+            })
         }
         
     }
 
     componentDidMount() {
 
-        fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=avenger`)
+        fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=avenger`)
             .then(response => response.json())
             .then(data => this.setState({movies: data.Search, loading: false}))
+            .catch((err) => {
+                console.error(err);
+                this.setState({loading: false});
+            })
     }
 
     componentDidUpdate() {
