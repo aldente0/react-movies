@@ -44,9 +44,6 @@ export class Main extends React.Component {
                 this.setState({loading: false});
             })
     }
-
-    componentDidUpdate() {
-    }
     
     render() {
         const {movies, loading} = this.state;
