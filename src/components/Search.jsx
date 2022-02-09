@@ -1,76 +1,62 @@
-import React from "react"
-export class Search extends React.Component  {
+import React, {useState} from "react"
+export function Search(props) {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			search: '',
-			filter: 'all',
-			pageNumber: 1,
-		}
-	}
+	const {totalResults, getSearchValue, search, changeSearch} = props;
 
-	hanldeKeyDown = (e) => {
-		if (e.code === 'Enter') {
+	/* const [search, setSearch] = useState(''); */
+	const [filter, setFilter] = useState('all');
+
+	const hanldeKeyDown = (e) => {
+		if (e.key === 'Enter') {
 			e.preventDefault();
-			this.props.getSearchValue(this.state.search, this.state.filter);
+			getSearchValue(search, filter);
 		}
 	}
-
-	handleClick = () => {
-		this.props.getSearchValue(this.state.search, this.state.filter)
-	}
 	
-	handleFilter = (e) => {
-		this.setState(() => ({filter: e.target.dataset.type,}), () => {
-			this.props.getSearchValue(this.state.search, this.state.filter);
-		})
+	const handleFilter = (e) => {
+		setFilter(e.target.dataset.type)
+		props.getSearchValue(search, e.target.dataset.type);
 	}
 
-	
-
-	hanldeChange = (e) => {
-		this.setState({[e.target.name]: e.target.value})
-	}
-
-	render() {
-
-		return <div className="row">
-			<div className="input-field">
-				<input 
-					id="search"
-					type="search"
-					name="search"
-					className="validate"
-					placeholder="Search"
-					onChange={this.hanldeChange}
-					onKeyDown={this.hanldeKeyDown}
-			/>
-			 
-			<button className="btn search-btn #1a237e indigo darken-4 right" onClick={this.handleClick}>search</button>
-		</div>
-		<div className="radio-btns left">
-			<p>
-			<label>
-					<input className="with-gap" name="filter"  type="radio" data-type='all' onChange={this.handleFilter} checked={this.state.filter === 'all'}/>
-					<span>All</span>
-				</label>
-			</p>
-			<p>
-				<label>
-					<input className="with-gap" name="filter" type="radio" data-type='movie' onChange={this.handleFilter} checked={this.state.filter === 'movie'}/>
-					<span>Movies only</span>
-				</label>
-			</p>
-			<p>
-				<label>
-					<input className="with-gap" name="filter"type="radio" data-type='series' onChange={this.handleFilter} checked={this.state.filter === 'series'}/>
-					<span>Series only</span>
-				</label>
-			</p>
-			</div>
-			<div className="totalResults right">Matches found: {this.props.totalResults}</div>
+	return <div className="row">
+		<div className="input-field">
+			<input 
+				id="search"
+				type="search"
+				name="search"
+				className="validate"
+				placeholder="Search"
+				onChange={(e) => {
+					changeSearch(e.target.value);
+					}
+				}
+				onKeyDown={hanldeKeyDown}
+		/>
+			
+		<button className="btn search-btn #1a237e indigo darken-4 right" onClick={() => {getSearchValue(search, filter)}}>search</button>
 	</div>
-	}
+	<div className="radio-btns left">
+		<p>
+		<label>
+				<input className="with-gap" name="filter"  type="radio" data-type='all' onChange={handleFilter} checked={filter === 'all'}/>
+				<span>All</span>
+			</label>
+		</p>
+		<p>
+			<label>
+				<input className="with-gap" name="filter" type="radio" data-type='movie' onChange={handleFilter} checked={filter === 'movie'}/>
+				<span>Movies only</span>
+			</label>
+		</p>
+		<p>
+			<label>
+				<input className="with-gap" name="filter"type="radio" data-type='series' onChange={handleFilter} checked={filter === 'series'}/>
+				<span>Series only</span>
+			</label>
+		</p>
+		</div>
+		<div className="totalResults right">Matches found: {totalResults}</div>
+	</div>
+	
 		
 }
